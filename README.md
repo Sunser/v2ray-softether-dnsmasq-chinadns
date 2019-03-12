@@ -44,6 +44,7 @@ chown -R nginx:nginx /opt/web/mirrors/
 ![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/009.png)
 如果对接多台服务端，可以cp 几份 config.json 文件 并修改 supervisor v2ray 配置文件：文件存在在 /etc/supervisor/supervisor.d/v2ray.conf
 配置示范:
+
 [program:v2ray-us]
 
 autostart = true
@@ -70,10 +71,12 @@ stdout_logfile = /opt/v2ray/v2ray-hk-stdout.log
 eoip 未采用 supervisor 托管进程，该配置直接存在于 /etc/rc.local 修改可以参照下面
 # us-tunnel
 /opt/eoip/eoip us-tunnel local 0.0.0.0 remote 10.0.1.254 id 1 fork
+
 sleep 1s && ip link set us-tunnel up && sysctl -w net.ipv6.conf.us-tunnel.disable_ipv6=1
 
 # hk-tunnel
 /opt/eoip/eoip hk-tunnel local 0.0.0.0 remote 10.0.1.254 id 2 fork
+
 sleep 1s && ip link set hk-tunnel up && sysctl -w net.ipv6.conf.hk-tunnel.disable_ipv6=1
 
 # us-tunnel 和 hk-tunnel 表示eoIp 隧道名称  local 本地监听IP remote ROS ip（内网情况就是内网网关，外网就是外部IP ） id 表示 id编号
