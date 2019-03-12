@@ -160,9 +160,13 @@ ROS 修改 dhcp 下发dns 服务器地址为该中转节点地址，或者PC 直
 
 # 其他补充
 gfwlist    手工更新命令
+
 wget -O gfwlist.conf https://cokebar.github.io/gfwlist2dnsmasq/dnsmasq_gfwlist.conf
+
 mv -f gfwlist.conf /etc/dnsmasq.d/
 
 china地址表 手工更新命令
+
 cd /opt/chinadns/
+
 curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > chnroute.txt
