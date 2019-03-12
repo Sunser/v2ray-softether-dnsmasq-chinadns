@@ -9,7 +9,7 @@
 Ros 内容： 使用 eoip 和 中转服务器对接，并使用 China地址取反来分流（可类似多线叠加 Pcc 分流方式）
 
 软件网络结构图：
-![image](v2ray-softether-dnsmasq-chinadns/images/001.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/001.png)
 
 使用方法：
 
@@ -80,14 +80,14 @@ Mac 自行找对应软件包
 
 下载后安装过程中选 softether vpn server 管理工具（仅限管理工具）这个选项，下一步 下一步这类的就不描述了
 安装完毕后先连接中专服务器
-![image](v2ray-softether-dnsmasq-chinadns/images/002.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/002.png)
 首次连接必须设置密码，这个密码自定义，接着弹出来一个简单配置向导以及L2TP服务器配置向导，直接关闭
 到此开始配置和服务器对接，如下直接附图
-![image](v2ray-softether-dnsmasq-chinadns/images/003.png)
-![image](v2ray-softether-dnsmasq-chinadns/images/004.png)
-![image](v2ray-softether-dnsmasq-chinadns/images/005.png)
-![image](v2ray-softether-dnsmasq-chinadns/images/006.png)
-![image](v2ray-softether-dnsmasq-chinadns/images/007.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/003.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/004.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/005.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/006.png)
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/007.png)
 上面softether socks5 的5001 改改口是客户端监听本地的端口(改成实际端口)
 hub 名称 脚本默认设置的 VPn ,用户认证 账号 VPNUser 密码 123456
 创建桥接那张图就是上面eoip 的隧道接口
