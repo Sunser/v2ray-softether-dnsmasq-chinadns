@@ -96,35 +96,54 @@ hub 名称 脚本默认设置的 VPn ,用户认证 账号 VPNUser 密码 123456
 3.配置ROS 对接 EOIP  直接参考脚本自行修改
 
 /interface eoip
+
 add name="proxy-tunnel1" remote-address=10.0.1.250 tunnel-id=1 comment="Us VPn"
+
 add name="proxy-tunnel2" remote-address=10.0.1.250 tunnel-id=2 comment="Hk VPn"
+
 :foreach i in=[find name~"proxy-tunnel"] do={unset $i keepalive ; set $i mtu=1500 disabled=no}
 
 /ip route
+
 add dst-address=0.0.0.0/0 gateway="proxy-tunnel1" routing-mark=PR1 disabled=no
+
 add dst-address=0.0.0.0/0 gateway="proxy-tunnel2" routing-mark=PR2 disabled=no
 
 /ip dhcp-client
+
 add interface=proxy-tunnel1 add-default-route=no use-peer-dns=no use-peer-ntp=no disabled=no script="\r\n:local \"router_id\"\r\n:local \"gateway_address\"\r\n\r\n/ip route\r\n:if (\$bound = 1) do={\r\n\t:set \"router_id\" [:pick \$interface 12 [:len \$interface]]\r\n\t:set \"gateway_address\" [get [find routing-mark=(\"PR\" .\$\"router_id\")] gateway]\r\n\t# \C5\D0\B6\CF\CD\F8\B9\D8\B1\E4\C1\BF\B2\BB\B5\C8\D3\DA\B2\A2\D6\B4\D0\D0\r\n\t:if (\$\"gateway_address\" != \$\"gateway-address\") do={\r\n\t\tset [find routing-mark=(\"PR\" .\$\"router_id\")] gateway=\$\"gateway-address\"\r\n\t}\r\n}\r\n" 
+
 add interface=proxy-tunnel2 add-default-route=no use-peer-dns=no use-peer-ntp=no disabled=no script="\r\n:local \"router_id\"\r\n:local \"gateway_address\"\r\n\r\n/ip route\r\n:if (\$bound = 1) do={\r\n\t:set \"router_id\" [:pick \$interface 12 [:len \$interface]]\r\n\t:set \"gateway_address\" [get [find routing-mark=(\"PR\" .\$\"router_id\")] gateway]\r\n\t# \C5\D0\B6\CF\CD\F8\B9\D8\B1\E4\C1\BF\B2\BB\B5\C8\D3\DA\B2\A2\D6\B4\D0\D0\r\n\t:if (\$\"gateway_address\" != \$\"gateway-address\") do={\r\n\t\tset [find routing-mark=(\"PR\" .\$\"router_id\")] gateway=\$\"gateway-address\"\r\n\t}\r\n}\r\n" 
 
 /ip firewall nat
+
 add action=masquerade chain=srcnat disabled=no out-interface="proxy-tunnel1" comment="Proxy Tunnel Reflux Rule"
+
 add action=masquerade chain=srcnat disabled=no out-interface="proxy-tunnel2"
 
 /ip firewall address-list
+
 remove [find list="NOProxy-Address" dynamic=no]
+
 add list="NOProxy-Address" address=Mirrors-Us.xxx.com comment="Us VPn Address"
+
 add list="NOProxy-Address" address=Mirrors-Hk.xxx.com comment="Hk VPn Address"
 
 /ip firewall mangle
+
 add chain=prerouting action=mark-connection disabled=yes dst-address-list=!"NOProxy-Address" dst-address-type=!local in-interface-list="Internal-Network-List" per-connection-classifier=both-addresses-and-ports:2/0 new-connection-mark=PC1 passthrough=yes comment="Proxy Pcc Rule-1"
+
 add action=mark-routing chain=prerouting connection-mark=PC1 disabled=yes in-interface-list="Internal-Network-List" new-routing-mark=PR1 passthrough=yes
+
 add action=mark-connection chain=input disabled=yes in-interface=proxy-tunnel1 new-connection-mark=PC1 passthrough=yes
+
 add action=mark-routing chain=output connection-mark=PC1 disabled=yes new-routing-mark=PR1 passthrough=yes
 
 add chain=prerouting action=mark-connection disabled=yes dst-address-list=!"NOProxy-Address" dst-address-type=!local in-interface-list="Internal-Network-List" per-connection-classifier=both-addresses-and-ports:2/1 new-connection-mark=PC2 passthrough=yes comment="Proxy Pcc Rule-2"
+
 add action=mark-routing chain=prerouting connection-mark=PC2 disabled=yes in-interface-list="Internal-Network-List" new-routing-mark=PR2 passthrough=yes
+
 add action=mark-connection chain=input disabled=yes in-interface=proxy-tunnel2 new-connection-mark=PC2 passthrough=yes
+
 add action=mark-routing chain=output connection-mark=PC2 disabled=yes new-routing-mark=PR2 passthrough=yes
 
