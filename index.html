@@ -1,0 +1,1435 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>USTC Open Source Software Mirror</title>
+    <link href="https://fonts.proxy.ustclug.org/css?family=Clicker+Script%7COpen+Sans:400,300" rel="stylesheet" type="text/css">
+<style rel='stylesheet' type='text/css'>
+/* css reset */
+html{color:#000;background:transparent;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
+/*stylesheet here*/
+body{
+    background-color: #FDFFFD;
+}
+#header{
+    width:75%;
+    margin:0 auto;
+}
+#headlinks{
+    float:right;
+    margin-right: 10px;
+    padding: 10px 0;
+}
+#headlinks li{
+    float:left;
+    margin-left:25px;
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    font-size:16px;
+    color:#EEECDF;
+}
+#headlinks li:hover{
+    color:#FFF;
+}
+#headlinks li a{
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    font-size:16px;
+    color:#EEECDF;
+    text-decoration:none;
+}
+#headlinks li a:hover{
+    color:#FFF;
+}
+#welcome{
+    /*width: 100%;*/
+    padding: 40px 15px 40px 0px;
+    background: #40bd97; /* Old browsers */
+    background: -moz-linear-gradient(top, #40bd97 0%, #07a878 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#40bd97), color-stop(100%,#07a878)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #40bd97 0%,#07a878 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #40bd97 0%,#07a878 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #40bd97 0%,#07a878 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #40bd97 0%,#07a878 100%); /* W3C */
+}
+#intro{
+    margin:0 auto;
+    width:75%;
+    color:#F1F1F1;
+}
+#intro h1{
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    font-weight:400;
+    font-size:48px;
+    margin-top:10px;
+    color:#FFF;
+}
+#intro h2{
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    font-weight:300;
+    font-size:24px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+#intro p{
+    margin-bottom:0px;
+    line-height:1.3em;
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    font-weight:300;
+    font-size:18px;
+}
+#wrapper{
+    width:75%;
+    margin:25px auto;
+}
+#filelist h3{
+    color:#07A878;
+    font-family: "Open Sans","Ubuntu","Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "STXihei", "ST Heiti", "WenQuanYi Zen Hei Sharp", sans-serif;
+    font-weight:100;
+    font-size:24px;
+    margin:5px 0 5px 0;
+}
+#filelist table{
+    width:100%;
+    empty-cells:hide;
+}
+th{
+    font-weight:normal;
+    text-align:left;
+    font-size:16px;
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    padding:3px 0px;
+}
+thead{
+    /*border-bottom:thin dotted #000;*/
+}
+#name{
+    text-align:left;
+    padding:3px 0 3px 3px;
+}
+#help{
+    text-align:left;
+    padding:3px 3px 3px 0;
+}
+#filelist td{
+    font-size:14px;
+    line-height:20px;
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+}
+#filelist td.help{
+    padding:0px 3px 0px 0px;
+    text-align: left;
+}
+#filelist td.filename
+{
+    padding-left:3px;
+}
+#filelist td a{
+    color:#0B486B;
+    text-decoration: none;
+}
+#filelist a:hover{
+    text-decoration: underline;
+}
+#revproxy,
+#revproxy + h3 > label > span + span,
+#revproxy:checked + h3 > label > span,
+#revproxy ~ div {
+    display: none;
+}
+#revproxy:checked + h3 > label > span + span {
+    display: inline-block;
+}
+#revproxy:checked ~ div {
+    display: block;
+}
+#filename{
+    text-align:left;
+    width:15%;
+}
+.filesize{
+    display:none;
+    text-align:right;
+    width:0%;
+}
+.filetime{
+    text-align:left;
+    width:35%;
+}
+
+.help{
+    text-align:left;
+    width:20px;
+}
+tbody tr:hover{
+    background-color:#DDEADD;
+}
+#sidebar div{
+    margin-bottom: 25px;
+}
+#sidebar h3{
+    color:#07A878;
+    font-family: "Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "STXihei", "ST Heiti", "WenQuanYi Zen Hei Sharp", sans-serif;
+    font-weight:300;
+    font-size:24px;
+    margin:0px 0 15px 0;
+}
+#sidebar p,a{
+    line-height: 1.5em;
+    font-family: "Open Sans","Ubuntu","Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "STXihei", "ST Heiti", "WenQuanYi Zen Hei Sharp", sans-serif;
+}
+#sidebar a{
+    color:#030303;
+    text-decoration: none;
+}
+#sidebar a:hover{
+    text-decoration: underline;
+}
+.btn{
+    display: inline-block;
+    background-color: #07A878;
+    margin:12px auto 12px auto;
+    padding:3px 20px;
+    line-height: 1.5em;
+    font-family: "Open Sans","Ubuntu","Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "STXihei", "ST Heiti", "WenQuanYi Zen Hei Sharp", sans-serif;
+    font-size: 20px;
+    color:#f3f3f3;
+    text-align: center;
+    -webkit-transition: background 0.3s linear;
+    -moz-transition: background 0.3s linear;
+    -ms-transition: background 0.3s linear;
+    -o-transition: background 0.3s linear;
+    transition: background 0.3s linear;
+    cursor:pointer;
+
+}
+.btn:hover{
+    background-color:#40BD97;
+}
+#footer{
+    background-color: #333;
+    color:#bbb;
+    padding:30px 0;
+}
+#footercontent{
+    width:75%;
+    margin:0 auto;
+}
+#footerleft{
+    font-family: "Open Sans","Ubuntu","Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "STXihei", "ST Heiti", "WenQuanYi Zen Hei Sharp", sans-serif;
+    width:60%;
+    float:left;
+    font-size: 14px;
+    line-height: 1.5em;
+}
+#footerleft a{
+    color:#ccc;
+}
+#footerright{
+    width:33%;
+    float:right;
+    text-align: center;
+}
+#footerright p{
+    margin-top:5px;
+}
+.modal
+{
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 5;
+}
+.modalclear{
+    width:100%;
+    background-color:rgba(255,255,255,0.85);
+    height:100%;
+    z-index: 6;
+}
+
+.modalcontainer
+{
+    position: absolute;
+    width: 40%;
+    min-width: 345px;
+    top:10%;
+    left:30%;
+    margin:0 auto;
+    background-color: #FCFCFC;
+    border: 3px solid #ccc;
+    padding: 0px;
+    text-align: left;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 0px 6px 3px rgba(128, 128, 128, 128);
+    box-shadow: 0px 0px 6px 3px rgba(128, 128, 128, 128);
+    opacity: 1;
+    z-index:7;
+}
+.modaltitle{
+    font-family: "Open Sans","Ubuntu",Helvetica, Arial, Geneva, sans-serif;
+    font-weight:300;
+    font-size:22px;
+    padding:8px 20px;
+    background-color: #07A878;
+    color:#FCFCFC;
+}
+.modalcontent{
+    font-family: "Open Sans","Ubuntu","Hiragino Sans GB", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "STXihei", "ST Heiti", "WenQuanYi Zen Hei Sharp", sans-serif;
+    font-size:22px;
+    padding:8px 20px;
+    background-color: #FFFFFF;
+    line-height: 1.8em;
+}
+.modalcontent p{
+    margin-bottom: 10px;
+}
+.modalcontent select{
+    width:300px;
+}
+@media screen and (min-width:881px) {
+    #filelist{
+        float:left;
+        width:60%;
+        border-right: 1px solid #eee;
+        padding-right: 30px;
+    }
+    #sidebar{
+        float:right;
+        width:33%;
+    }
+}
+@media screen and (max-width:880px) {
+    #filelist{
+        float: left;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    #sidebar {
+        float: left;
+        max-width: 400px;
+        width: 100%;
+    }
+    #isomodalcontainer {
+        left: 0%;
+        width: 100%;
+        text-align: center;
+        min-width: 0;
+    }
+}
+/* when a page is narrower than 540px,
+   regarded as mobile device
+ */
+@media screen and (max-width:540px) {
+    .update, .filetime, #infinity {
+        display: none;
+    }
+    #intro h2 {
+        font-weight: 500;
+    }
+    #footerleft, #header {
+        width: 100%;
+        float: none;
+    }
+    #footerright {
+        float: none;
+        width: 100%;
+        margin-top: 2em;
+    }
+    #welcome {
+        padding-bottom: 0px;
+    }
+    #search {
+        width: 50%;
+    }
+}
+.hidden {
+    display: none;
+}
+#filetitle {
+    float: left;
+    line-height: 36px;
+}
+#search {
+    float: right;
+    line-height: 18px;
+    padding: 8px;
+    border: 1px solid #e3e3e3;
+    margin-top: 5px;
+    max-width: 240px;
+    font-size: 16px;
+}
+</style>
+</head>
+<body>
+<div id="header">
+    <ul id="headlinks">
+        <li><a href="/status/" target="_blank">Status</a></li>
+        <li><a href="https://servers.ustclug.org/" target="_blank">News</a></li>
+        <li><a href="/help/" target="_blank">Help</a></li>
+        <li><a href="https://lug.ustc.edu.cn" target="_blank">About</a></li>
+    </ul>
+</div>
+<div id="welcome">
+    <div id="intro">
+        <h1 id="infinity">Another infinity</h1>
+        <h2>Welcome to USTC open source software mirror.</h2>
+        <p>Brought to you by University of Science and Technology of China and USTCLUG.</p>
+        <br>
+    </div>
+</div>
+<div id="wrapper">
+    <div id="filelist">
+        <!--FIXME: kind of ugly :(-->
+        <div style="overflow:hidden">
+            <input id="revproxy" type="checkbox"/>
+            <h3>
+            <label for="revproxy">
+            反向代理列表
+            <span>+</span><span>-</span>
+            </label>
+            </h3>
+            <div style="overflow-x:auto">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>registry-1.docker.io</td>
+                            <td>docker.mirrors.ustc.edu.cn</td>
+                        </tr>
+                        <tr>
+                            <td>packages.elastic.co</td>
+                            <td>elastic.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>ppa.launchpad.net</td>
+                            <td>launchpad.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>archive.cloudera.com/cdh5/</td>
+                            <td>cloudera.proxy.ustclug.org/cdh5/</td>
+                        </tr>
+                        <tr>
+                            <td>downloads.openwrt.org</td>
+                            <td>openwrt.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>registry.npmjs.org</td>
+                            <td>npmreg.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>www.npmjs.com</td>
+                            <td>npm.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>fonts.gstatic.com</td>
+                            <td>fonts-gstatic.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>fonts.googleapis.com</td>
+                            <td>fonts.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>ajax.googleapis.com</td>
+                            <td>ajax.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>themes.googleusercontent.com</td>
+                            <td>google-themes.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>dl.bintray.com</td>
+                            <td>bintray.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>repo.typesafe.com</td>
+                            <td>typesafe.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>repo1.maven.org</td>
+                            <td>maven.proxy.ustclug.org</td>
+                        </tr>
+                        <tr>
+                            <td>repo.scala-sbt.org</td>
+                            <td>scala-sbt.proxy.ustclug.org</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h3 id="filetitle">文件列表</h3>
+            <input placeholder="按 S 过滤" id="search" type="search" autocomplete="off"/>
+        </div>
+        <table class="filelist">
+            <thead>
+                <tr id="firstline">
+                    <th id="name">Folder</th>
+                    <th class="update">Last Update</th>
+                    <th id="help">Help</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="filename"><a href="alpine/">alpine</a></td>
+                <td class="filetime">2018-11-01 05:06:24</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/alpine.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="anaconda/">anaconda</a></td>
+                <td class="filetime">2018-11-01 01:21:00</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/anaconda.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="antergos/">antergos</a></td>
+                <td class="filetime">2018-11-01 05:29:08</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="anthon/">anthon</a></td>
+                <td class="filetime">2018-11-01 02:19:52</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/anthon.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="aosp/">aosp</a></td>
+                <td class="filetime">2017-10-30 19:27:51</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="aosp-monthly/">aosp-monthly</a></td>
+                <td class="filetime">2018-10-01 04:36:57</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="apache/">apache</a></td>
+                <td class="filetime">2018-11-01 02:37:30</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="archive.raspberrypi.org/">archive.raspberrypi.org</a></td>
+                <td class="filetime">2018-11-01 06:16:17</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/archive.raspberrypi.org.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="archlinux/">archlinux</a></td>
+                <td class="filetime">2018-11-01 06:23:25</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/archlinux.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="archlinuxarm/">archlinuxarm</a></td>
+                <td class="filetime">2018-11-01 06:05:23</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/archlinuxarm">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="archlinuxcn/">archlinuxcn</a></td>
+                <td class="filetime">2018-11-01 09:09:08</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/archlinuxcn.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="bioc/">bioc</a></td>
+                <td class="filetime">2018-11-01 02:35:06</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="bjlx/">bjlx</a></td>
+                <td class="filetime">2018-11-01 03:35:14</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="blackarch/">blackarch</a></td>
+                <td class="filetime">2018-11-01 03:15:29</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/blackarch.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="brew.git/">brew.git</a></td>
+                <td class="filetime">2018-11-01 08:53:06</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/brew.git.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="centos/">centos</a></td>
+                <td class="filetime">2018-11-01 07:24:02</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/centos.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="centos-altarch/">centos-altarch</a></td>
+                <td class="filetime">2018-11-01 03:14:54</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="centos-cloud/">centos-cloud</a></td>
+                <td class="filetime">2018-11-01 03:49:04</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ceph/">ceph</a></td>
+                <td class="filetime">2018-11-01 02:17:39</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="chakra/">chakra</a></td>
+                <td class="filetime">2018-11-01 05:27:48</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/chakra.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="clojars/">clojars</a></td>
+                <td class="filetime">2018-11-01 08:49:55</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="cloveros/">cloveros</a></td>
+                <td class="filetime">2018-11-01 03:50:53</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="CPAN/">CPAN</a></td>
+                <td class="filetime">2018-11-01 03:50:01</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/CPAN">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="CRAN/">CRAN</a></td>
+                <td class="filetime">2018-11-01 05:10:10</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/CRAN">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="crates.io-index/">crates.io-index</a></td>
+                <td class="filetime">2017-10-30 19:28:49</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/crates.io-index.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="CTAN/">CTAN</a></td>
+                <td class="filetime">2018-11-01 04:42:51</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ctex/">ctex</a></td>
+                <td class="filetime">2017-10-30 19:28:49</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/ctex">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="cygwin/">cygwin</a></td>
+                <td class="filetime">2018-11-01 04:08:01</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="deb-multimedia/">deb-multimedia</a></td>
+                <td class="filetime">2018-11-01 02:48:17</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/deb-multimedia.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="debian/">debian</a></td>
+                <td class="filetime">2018-11-01 06:18:27</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/debian.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="debian-cd/">debian-cd</a></td>
+                <td class="filetime">2018-11-01 00:08:38</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/debian-cd.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="debian-cdimage/">debian-cdimage</a></td>
+                <td class="filetime">2018-10-30 04:56:02</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/debian-cdimage.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="debian-security/">debian-security</a></td>
+                <td class="filetime">2018-11-01 08:51:59</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/debian-security.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="debiancn/">debiancn</a></td>
+                <td class="filetime">2018-11-01 01:25:32</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/debiancn.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="deepin/">deepin</a></td>
+                <td class="filetime">2018-10-31 22:30:33</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="deepin-cd/">deepin-cd</a></td>
+                <td class="filetime">2018-11-01 01:15:05</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="docker-ce/">docker-ce</a></td>
+                <td class="filetime">2018-11-01 04:10:06</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/docker-ce.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="dotdeb/">dotdeb</a></td>
+                <td class="filetime">2018-11-01 03:25:20</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/dotdeb">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="eclipse/">eclipse</a></td>
+                <td class="filetime">2018-10-31 23:07:14</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/eclipse">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="elrepo/">elrepo</a></td>
+                <td class="filetime">2018-11-01 07:26:23</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="epel/">epel</a></td>
+                <td class="filetime">2018-10-31 21:51:14</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/epel.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="fedora/">fedora</a></td>
+                <td class="filetime">2018-10-31 22:35:01</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/fedora.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="fedora-altarch/">fedora-altarch</a></td>
+                <td class="filetime">2018-11-01 03:05:19</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="fink/">fink</a></td>
+                <td class="filetime">2018-10-28 04:48:34</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="freebsd/">freebsd</a></td>
+                <td class="filetime">2018-11-01 05:30:47</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/freebsd.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="freebsd-pkg/">freebsd-pkg</a></td>
+                <td class="filetime">2018-11-01 02:05:38</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/freebsd-pkg.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="freebsd-ports/">freebsd-ports</a></td>
+                <td class="filetime">2018-11-01 02:57:24</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/freebsd-ports.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="gentoo/">gentoo</a></td>
+                <td class="filetime">2018-10-31 22:57:37</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/gentoo.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="gentoo-portage/">gentoo-portage</a></td>
+                <td class="filetime">2018-11-01 08:17:33</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/gentoo-portage.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="gimp/">gimp</a></td>
+                <td class="filetime">2018-11-01 07:47:29</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="gmt/">gmt</a></td>
+                <td class="filetime">2018-11-01 06:24:10</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="gnome/">gnome</a></td>
+                <td class="filetime">2018-11-01 05:29:02</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="gnu/">gnu</a></td>
+                <td class="filetime">2018-11-01 03:46:41</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="golang/">golang</a></td>
+                <td class="filetime">2018-11-01 02:01:08</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="hackage/">hackage</a></td>
+                <td class="filetime">2018-10-31 09:14:46</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/hackage.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="homebrew-bottles/">homebrew-bottles</a></td>
+                <td class="filetime">2018-11-01 08:55:49</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/homebrew-bottles.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="homebrew-cask.git/">homebrew-cask.git</a></td>
+                <td class="filetime">2018-11-01 08:55:52</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/homebrew-cask.git.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="homebrew-core.git/">homebrew-core.git</a></td>
+                <td class="filetime">2018-11-01 08:55:48</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/homebrew-core.git.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="influxdata/">influxdata</a></td>
+                <td class="filetime">2018-11-01 05:24:27</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ius/">ius</a></td>
+                <td class="filetime">2018-11-01 07:12:33</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="jenkins/">jenkins</a></td>
+                <td class="filetime">2018-11-01 03:14:28</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="julia/">julia</a></td>
+                <td class="filetime">2018-11-01 02:40:43</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="kali/">kali</a></td>
+                <td class="filetime">2018-11-01 00:50:38</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/kali.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="kali-images/">kali-images</a></td>
+                <td class="filetime">2018-11-01 03:13:08</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="kde/">kde</a></td>
+                <td class="filetime">2018-11-01 06:26:57</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/kde">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="kde-application/">kde-application</a></td>
+                <td class="filetime">2018-11-01 03:07:35</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="kernel.org/">kernel.org</a></td>
+                <td class="filetime">2018-11-01 08:50:07</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="knoppix/">knoppix</a></td>
+                <td class="filetime">2018-02-18 05:05:06</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="knoppix-dvd/">knoppix-dvd</a></td>
+                <td class="filetime">2018-05-16 06:04:33</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="kubernetes/">kubernetes</a></td>
+                <td class="filetime">2018-11-01 03:26:10</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="lede/">lede</a></td>
+                <td class="filetime">2018-11-01 04:19:04</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/lede.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="lfs/">lfs</a></td>
+                <td class="filetime">2018-11-01 01:25:09</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="lineageos/">lineageos</a></td>
+                <td class="filetime">2018-11-01 01:38:34</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="linux.git/">linux.git</a></td>
+                <td class="filetime">2018-11-01 06:18:32</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/linux.git">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="linuxmint/">linuxmint</a></td>
+                <td class="filetime">2018-11-01 07:55:33</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/linuxmint.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="linuxmint-cd/">linuxmint-cd</a></td>
+                <td class="filetime">2018-11-01 01:55:06</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="loongson/">loongson</a></td>
+                <td class="filetime">2018-10-28 05:35:04</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="loongson2f/">loongson2f</a></td>
+                <td class="filetime">2018-10-28 08:05:03</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="macports/">macports</a></td>
+                <td class="filetime">2018-11-01 08:35:48</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="mageia/">mageia</a></td>
+                <td class="filetime">2018-11-01 07:26:53</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/mageia.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="manjaro/">manjaro</a></td>
+                <td class="filetime">2018-11-01 04:34:39</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/manjaro.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="manjaro-arm/">manjaro-arm</a></td>
+                <td class="filetime">2018-11-01 04:28:44</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="manjaro-cd/">manjaro-cd</a></td>
+                <td class="filetime">2018-10-30 23:17:13</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="mariadb/">mariadb</a></td>
+                <td class="filetime">2018-11-01 03:37:40</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/mariadb.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="monitoring-plugins/">monitoring-plugins</a></td>
+                <td class="filetime">2018-11-01 03:53:05</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="msys2/">msys2</a></td>
+                <td class="filetime">2018-11-01 04:00:30</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/msys2.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="mysql-ftp/">mysql-ftp</a></td>
+                <td class="filetime">2018-11-01 05:45:37</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="mysql-repo/">mysql-repo</a></td>
+                <td class="filetime">2018-11-01 05:45:32</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="neurodebian/">neurodebian</a></td>
+                <td class="filetime">2018-11-01 05:36:45</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="nginx/">nginx</a></td>
+                <td class="filetime">2018-11-01 05:26:35</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="node/">node</a></td>
+                <td class="filetime">2018-11-01 07:48:26</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="nodesource/">nodesource</a></td>
+                <td class="filetime">2018-11-01 06:03:22</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/nodesource.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="openelec/">openelec</a></td>
+                <td class="filetime">2018-02-18 06:43:07</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="openresty/">openresty</a></td>
+                <td class="filetime">2018-11-01 05:28:56</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="opensuse/">opensuse</a></td>
+                <td class="filetime">2018-11-01 04:51:27</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/opensuse.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="openvz/">openvz</a></td>
+                <td class="filetime">2018-11-01 01:42:47</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="packman/">packman</a></td>
+                <td class="filetime">2018-11-01 04:54:41</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/packman.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="parrot/">parrot</a></td>
+                <td class="filetime">2018-11-01 05:59:03</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="percona/">percona</a></td>
+                <td class="filetime">2018-10-25 02:41:26</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="postgresql/">postgresql</a></td>
+                <td class="filetime">2018-11-01 07:46:53</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="proxmox/">proxmox</a></td>
+                <td class="filetime">2018-11-01 05:59:34</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="puppy/">puppy</a></td>
+                <td class="filetime">2018-11-01 05:23:44</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="pypi/">pypi</a></td>
+                <td class="filetime">2018-10-29 22:53:04</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/pypi.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="pythonxy/">pythonxy</a></td>
+                <td class="filetime">2018-02-18 02:55:04</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="qtproject/">qtproject</a></td>
+                <td class="filetime">2018-11-01 04:07:29</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/qtproject">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="raspbian/">raspbian</a></td>
+                <td class="filetime">2018-11-01 07:32:24</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/raspbian.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="remi/">remi</a></td>
+                <td class="filetime">2018-10-27 04:05:44</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="rfc/">rfc</a></td>
+                <td class="filetime">2018-11-01 01:55:32</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ros/">ros</a></td>
+                <td class="filetime">2018-11-01 08:04:06</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/ros">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="rpmfusion/">rpmfusion</a></td>
+                <td class="filetime">2018-11-01 08:09:16</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/rpmfusion.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ruby/">ruby</a></td>
+                <td class="filetime">2018-10-31 07:35:17</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="rubygems/">rubygems</a></td>
+                <td class="filetime">2018-11-01 06:54:00</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/rubygems.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="sagemath/">sagemath</a></td>
+                <td class="filetime">2018-11-01 04:25:22</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="salt/">salt</a></td>
+                <td class="filetime">2018-10-29 17:04:46</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="scientificlinux/">scientificlinux</a></td>
+                <td class="filetime">2018-10-29 23:43:59</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/scientificlinux">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="slackware/">slackware</a></td>
+                <td class="filetime">2018-11-01 04:14:24</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="stackage/">stackage</a></td>
+                <td class="filetime">2018-10-31 21:11:25</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/stackage.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="steamos/">steamos</a></td>
+                <td class="filetime">2018-11-01 05:30:33</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="tdf/">tdf</a></td>
+                <td class="filetime">2018-11-01 03:45:16</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="termux/">termux</a></td>
+                <td class="filetime">2018-11-01 03:45:18</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/termux.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="tldp/">tldp</a></td>
+                <td class="filetime">2018-11-01 06:47:12</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="trisquel/">trisquel</a></td>
+                <td class="filetime">2018-11-01 02:19:29</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/trisquel.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="trisquel-images/">trisquel-images</a></td>
+                <td class="filetime">2018-11-01 03:05:04</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="turnkeylinux/">turnkeylinux</a></td>
+                <td class="filetime">2018-11-01 06:23:21</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ubuntu/">ubuntu</a></td>
+                <td class="filetime">2018-11-01 02:45:28</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/ubuntu.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ubuntu-cdimage/">ubuntu-cdimage</a></td>
+                <td class="filetime">2018-11-01 07:30:13</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/ubuntu-cdimage.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ubuntu-cloud-images/">ubuntu-cloud-images</a></td>
+                <td class="filetime">2018-10-30 06:37:58</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/ubuntu-cloud-images.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ubuntu-old-releases/">ubuntu-old-releases</a></td>
+                <td class="filetime">2018-10-28 09:30:36</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/ubuntu-old-releases.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ubuntu-ports/">ubuntu-ports</a></td>
+                <td class="filetime">2018-10-30 03:28:29</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/ubuntu-ports.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="ubuntu-releases/">ubuntu-releases</a></td>
+                <td class="filetime">2018-11-01 03:30:07</td>
+                <td class="help">
+                    <a href="http://mirrors.ustc.edu.cn/help/ubuntu-releases.html">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="videolan-ftp/">videolan-ftp</a></td>
+                <td class="filetime">2018-11-01 03:23:43</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="vim/">vim</a></td>
+                <td class="filetime">2018-11-01 04:05:33</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="wine/">wine</a></td>
+                <td class="filetime">2018-11-01 04:08:41</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="xbmc/">xbmc</a></td>
+                <td class="filetime">2018-11-01 02:55:05</td>
+                <td class="help">
+                    <a href="https://lug.ustc.edu.cn/wiki/mirrors/help/xbmc">Help</a>
+                </td>
+            </tr><tr>
+                <td class="filename"><a href="Xorg/">Xorg</a></td>
+                <td class="filetime">2018-11-01 04:25:52</td>
+                <td class="help">
+                    <a href=""></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<div id="sidebar">
+    <div id="servernews">
+    <a href="https://servers.ustclug.org/category/mirrors/"><h3>镜像站新闻通知</h3></a>
+    
+        <p><a href="https://servers.ustclug.org/2018/08/mirrors-maintenance-notification-3/">镜像站停机维护通知 (2018-08-15)</a></p><p><a href="https://servers.ustclug.org/2018/06/mirrors-maintenance-notification-2/">镜像站停机维护通知 (2018-06-04)</a></p><p><a href="https://servers.ustclug.org/2018/05/mirrors-maintenance-notification/">镜像站停机维护通知</a></p>
+    
+    </div>
+    <div id="cdimages">
+        <h3>获取发行版映像</h3>
+        <p>这里为您提供各大主流 Linux 发行版的安装镜像 / ISO 文件，请根据您的发行版及其详细版本进行选择：</p>
+        <p></p>
+        <span class="btn" onclick="modal()">获取安装镜像 &gt;</span>
+    </div>
+    <div id="domains">
+        <h3>域名选择</h3>
+        <a href="//mirrors.ustc.edu.cn/">mirrors.ustc.edu.cn</a> 自动解析<br/>
+        <a href="//ipv4.mirrors.ustc.edu.cn/">ipv4.mirrors.ustc.edu.cn</a> IPv4 线路<br/>
+        <a href="//ipv6.mirrors.ustc.edu.cn/">ipv6.mirrors.ustc.edu.cn</a> IPv6 线路<br/>
+        <a href="//cernet.mirrors.ustc.edu.cn/">cernet.mirrors.ustc.edu.cn</a>  教育网线路<br/>
+        <a href="//chinanet.mirrors.ustc.edu.cn/">chinanet.mirrors.ustc.edu.cn</a> 电信线路<br/>
+        <a href="//unicom.mirrors.ustc.edu.cn/">unicom.mirrors.ustc.edu.cn</a> 联通线路<br/>
+        <a href="//cmcc.mirrors.ustc.edu.cn/">cmcc.mirrors.ustc.edu.cn</a>  移动线路<br/>
+        <a href="/help/rsync-guide.html">rsync.mirrors.ustc.edu.cn</a> Rsync 线路<br/>
+        <span></span>
+    </div>
+    <div id="mirrorshelp">
+        <h3>Mirrors 帮助</h3>
+        <p>如果您不了解如何配置 Linux 发行版 / 软件的安装源， 这里为您提供了主流发行版的软件源配置帮助：</p>
+        <span class="btn" onclick="window.open('/help')">配置软件源  &gt;</span>
+        <p>您也可以通过左边的文件列表中相应源的 Help 链接寻求帮助。</p>
+        <span></span>
+    </div>
+    <div id="mirrorlinks">
+        <h3>常用链接</h3>
+        <a href="/status" target="_blank">系统状态 / Status</a><br/>
+        <a href="https://servers.ustclug.org/" target="_blank">LUG 服务器新闻 / News</a><br/>
+        <a href="http://lug.ustc.edu.cn/" target="_blank">LUG@USTC</a><br/>
+        <a href="https://github.com/ustclug/mirrorrequest/" target="_blank">新增镜像 / New Mirror</a><br/>
+        <a href="mailto:lug@ustc.edu.cn">联系我们 / Contact US</a><br/>
+        <span></span>
+    </div>
+</div>
+<div style="clear: both;"></div>
+</div>
+<div id="footer">
+    <div id="footercontent">
+        <div id="footerleft">
+            <p>中国科学技术大学开源软件镜像由 <a href="http://ustcnet.ustc.edu.cn/">中国科学技术大学网络信息中心</a> 提供支持。</p>
+            <p>mirrors.ustc.edu.cn 是 Debian, Ubuntu, Fedora, Archlinux, CentOS 等多个发行版的官方源。目前是中国大陆高校访问量最大，收录最全的开源软件镜像。</p>
+	    <p><a href="https://lug.ustc.edu.cn/">中国科学技术大学 Linux 用户协会</a> 是由中国科学技术大学在校的 GNU/Linux 爱好者发起并组成的一个全校性群众团体。成立协会的目的在于联合科大的 GNU/Linux 使用者，搭建信息交流共享的平台，宣传自由软件的价值，提高自由软件社区文化氛围，推广自由软件在科大校园乃至合肥地区的应用。</p>
+        </div>
+        <div id="footerright">
+            <p><span style="font-family:'Open Sans','Seoge UI','Ubuntu',sans-serif; font-size:2em; font-weight:400">LUG</span><span style="font-family:'Open Sans','Seoge UI','Ubuntu',sans-serif; font-size:2em; font-weight:100" >@USTC</span></p>
+            <p style="font-family:'clicker script','segoe script','Comic Sans MS'; font-size:28px">"life,love,linux"</p>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+<div class="modal" id="isomodal">
+    <div class="modalclear" id="isomodalclear" onclick="modal()"></div>
+    <div class="modalcontainer" id="isomodalcontainer" onclick="">
+        <div class="modaltitle" id="isomodaltitle"><span>获取安装镜像</span><span onclick="modal()" style="float:right;cursor:pointer">X</span></div>
+        <div class="modalcontent" id="isomodalcontent">
+            <p>选择安装发行版： <select id="isodistro" onchange="switchdistro()"></select></p>
+            <p>选择发行版版本： <select id="isoversion">
+                <option value="none">-</option>
+            </select>
+            </p>
+            <span class="btn" onclick="downloadiso();">获取 ISO &gt;</span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//var isoinfo = "INCLUDE isoinfo.json";
+var isoinfo = [{"urls": [{"url": "/ubuntu-releases/cosmic/ubuntu-18.10-desktop-amd64.iso", "name": "18.10 (amd64, desktop LiveCD)"}, {"url": "/ubuntu-releases/bionic/ubuntu-18.04.1-desktop-amd64.iso", "name": "18.04.1 (amd64, desktop LiveCD)"}, {"url": "/ubuntu-releases/xenial/ubuntu-16.04.5-desktop-amd64.iso", "name": "16.04.5 (amd64, desktop LiveCD)"}, {"url": "/ubuntu-releases/xenial/ubuntu-16.04.5-desktop-i386.iso", "name": "16.04.5 (i386, desktop LiveCD)"}, {"url": "/ubuntu-releases/trusty/ubuntu-14.04.5-desktop-amd64.iso", "name": "14.04.5 (amd64, desktop LiveCD)"}, {"url": "/ubuntu-releases/trusty/ubuntu-14.04.5-desktop-i386.iso", "name": "14.04.5 (i386, desktop LiveCD)"}], "distro": "Ubuntu"}, {"urls": [{"url": "/ubuntu-cdimage/ubuntukylin/releases/cosmic/release/ubuntukylin-18.10-desktop-amd64.iso", "name": "Ubuntu Kylin 18.10 (amd64)"}, {"url": "/ubuntu-cdimage/kubuntu/releases/cosmic/release/kubuntu-18.10-desktop-amd64.iso", "name": "Kubuntu 18.10 (amd64)"}, {"url": "/ubuntu-cdimage/lubuntu/releases/cosmic/release/lubuntu-18.10-desktop-amd64.iso", "name": "Lubuntu 18.10 (amd64)"}, {"url": "/ubuntu-cdimage/lubuntu/releases/cosmic/release/lubuntu-18.10-desktop-i386.iso", "name": "Lubuntu 18.10 (i386)"}, {"url": "/ubuntu-cdimage/xubuntu/releases/cosmic/release/xubuntu-18.10-desktop-amd64.iso", "name": "Xubuntu 18.10 (amd64)"}, {"url": "/ubuntu-cdimage/xubuntu/releases/cosmic/release/xubuntu-18.10-desktop-i386.iso", "name": "Xubuntu 18.10 (i386)"}, {"url": "/ubuntu-cdimage/ubuntu-gnome/releases/xenial/release/ubuntu-gnome-16.04.5-desktop-amd64.iso", "name": "Ubuntu Gnome 16.04.5 (amd64)"}, {"url": "/ubuntu-cdimage/ubuntu-gnome/releases/xenial/release/ubuntu-gnome-16.04.5-desktop-i386.iso", "name": "Ubuntu Gnome 16.04.5 (i386)"}, {"url": "/ubuntu-cdimage/ubuntu-mate/releases/cosmic/release/ubuntu-mate-18.10-desktop-amd64.iso", "name": "Ubuntu Mate 18.10 (amd64)"}], "distro": "Ubuntu \u884d\u751f\u7248"}, {"urls": [{"url": "/debian-cd/current/amd64/iso-dvd/debian-9.5.0-amd64-DVD-1.iso", "name": "9.5.0 (amd64, DVD installer)"}, {"url": "/debian-cd/current/i386/iso-dvd/debian-9.5.0-i386-DVD-1.iso", "name": "9.5.0 (i386, DVD installer)"}, {"url": "/debian-cd/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-xfce.iso", "name": "9.5.0 (amd64, xfce live)"}, {"url": "/debian-cd/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-mate.iso", "name": "9.5.0 (amd64, mate live)"}, {"url": "/debian-cd/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-lxde.iso", "name": "9.5.0 (amd64, lxde live)"}, {"url": "/debian-cd/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-kde.iso", "name": "9.5.0 (amd64, kde live)"}, {"url": "/debian-cd/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-gnome.iso", "name": "9.5.0 (amd64, gnome live)"}, {"url": "/debian-cd/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-cinnamon.iso", "name": "9.5.0 (amd64, cinnamon live)"}, {"url": "/debian-cdimage/weekly-builds/amd64/iso-dvd/debian-testing-amd64-DVD-1.iso", "name": "testing (amd64, DVD installer)"}, {"url": "/debian-cdimage/weekly-builds/i386/iso-dvd/debian-testing-i386-DVD-1.iso", "name": "testing (i386, DVD installer)"}], "distro": "Debian"}, {"urls": [{"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-dvd/firmware-9.5.0-amd64-DVD-1.iso", "name": "9.5.0 (amd64, DVD installer)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current/i386/iso-dvd/firmware-9.5.0-i386-DVD-1.iso", "name": "9.5.0 (i386, DVD installer)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-xfce+nonfree.iso", "name": "9.5.0 (amd64, xfce live)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-mate+nonfree.iso", "name": "9.5.0 (amd64, mate live)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-lxde+nonfree.iso", "name": "9.5.0 (amd64, lxde live)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-kde+nonfree.iso", "name": "9.5.0 (amd64, kde live)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-gnome+nonfree.iso", "name": "9.5.0 (amd64, gnome live)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-9.5.0-amd64-cinnamon+nonfree.iso", "name": "9.5.0 (amd64, cinnamon live)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/weekly-builds/amd64/iso-cd/firmware-testing-amd64-netinst.iso", "name": "testing (amd64, Network installer)"}, {"url": "/debian-cdimage/unofficial/non-free/cd-including-firmware/weekly-builds/i386/iso-cd/firmware-testing-i386-netinst.iso", "name": "testing (i386, Network installer)"}], "distro": "Debian\uff08\u542b\u975e\u81ea\u7531\u56fa\u4ef6\uff09"}, {"urls": [{"url": "/archlinux/iso/latest/archlinux-2018.10.01-x86_64.iso", "name": "2018.10.01 (x86_64, CLI-only)"}], "distro": "Archlinux"}, {"urls": [{"url": "/manjaro-cd/xfce/17.1.12/manjaro-xfce-17.1.12-stable-x86_64.iso", "name": "17.1.12 (x86_64, xfce)"}, {"url": "/manjaro-cd/kde/17.1.12/manjaro-kde-17.1.12-stable-x86_64.iso", "name": "17.1.12 (x86_64, kde)"}, {"url": "/manjaro-cd/gnome/17.1.12/manjaro-gnome-17.1.12-stable-x86_64.iso", "name": "17.1.12 (x86_64, gnome)"}, {"url": "/manjaro-cd/architect/17.1.12/manjaro-architect-17.1.12-stable-x86_64.iso", "name": "17.1.12 (x86_64, architect)"}], "distro": "Manjaro"}, {"urls": [{"url": "/fedora/releases/29/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-29-1.2.iso", "name": "29 (x86_64, Workstation)"}, {"url": "/fedora/releases/29/Spins/x86_64/iso/Fedora-KDE-Live-x86_64-29-1.2.iso", "name": "29 (x86_64, KDE)"}, {"url": "/fedora/releases/29/Spins/x86_64/iso/Fedora-Cinnamon-Live-x86_64-29-1.2.iso", "name": "29 (x86_64, Cinnamon)"}, {"url": "/fedora/releases/28/Spins/x86_64/iso/Fedora-Xfce-Live-x86_64-28-1.1.iso", "name": "28 (x86_64, Xfce)"}, {"url": "/fedora/releases/28/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-28-1.1.iso", "name": "28 (x86_64, Workstation)"}, {"url": "/fedora/releases/28/Spins/x86_64/iso/Fedora-KDE-Live-x86_64-28-1.1.iso", "name": "28 (x86_64, KDE)"}, {"url": "/fedora/releases/28/Spins/x86_64/iso/Fedora-Cinnamon-Live-x86_64-28-1.1.iso", "name": "28 (x86_64, Cinnamon)"}], "distro": "Fedora"}, {"urls": [{"url": "/deepin-cd/releases/15.7/deepin-15.7-amd64.iso", "name": "15.7 (amd64)"}], "distro": "Deepin"}, {"urls": [{"url": "/opensuse/distribution/leap/42.3/iso/openSUSE-Leap-42.3-DVD-x86_64.iso", "name": "42.3 (x86_64)"}, {"url": "/opensuse/distribution/leap/42.2/iso/openSUSE-Leap-42.2-DVD-x86_64.iso", "name": "42.2 (x86_64)"}, {"url": "/opensuse/distribution/leap/15.0/iso/openSUSE-Leap-15.0-DVD-x86_64.iso", "name": "15.0 (x86_64)"}], "distro": "openSUSE"}, {"urls": [{"url": "/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-NetInstall-1804.iso", "name": "7 (x86_64, NetInstall)"}, {"url": "/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso", "name": "7 (x86_64, Minimal)"}, {"url": "/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-LiveKDE-1804.iso", "name": "7 (x86_64, LiveKDE)"}, {"url": "/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-LiveGNOME-1804.iso", "name": "7 (x86_64, LiveGNOME)"}, {"url": "/centos/6.10/isos/x86_64/CentOS-6.10-x86_64-netinstall.iso", "name": "6.10 (x86_64, netinstall)"}, {"url": "/centos/6.10/isos/x86_64/CentOS-6.10-x86_64-minimal.iso", "name": "6.10 (x86_64, minimal)"}, {"url": "/centos/6.10/isos/x86_64/CentOS-6.10-x86_64-LiveDVD.iso", "name": "6.10 (x86_64, LiveDVD)"}, {"url": "/centos/6.10/isos/i386/CentOS-6.10-i386-netinstall.iso", "name": "6.10 (i386, netinstall)"}, {"url": "/centos/6.10/isos/i386/CentOS-6.10-i386-minimal.iso", "name": "6.10 (i386, minimal)"}, {"url": "/centos/6.10/isos/i386/CentOS-6.10-i386-LiveDVD.iso", "name": "6.10 (i386, LiveDVD)"}], "distro": "CentOS"}, {"urls": [{"url": "/linuxmint-cd/stable/19/linuxmint-19-mate-64bit-v2.iso", "name": "19 (64bit, mate)"}, {"url": "/linuxmint-cd/stable/19/linuxmint-19-mate-64bit.iso", "name": "19 (64bit, mate)"}, {"url": "/linuxmint-cd/stable/19/linuxmint-19-cinnamon-64bit-v2.iso", "name": "19 (64bit, cinnamon)"}, {"url": "/linuxmint-cd/stable/19/linuxmint-19-cinnamon-64bit.iso", "name": "19 (64bit, cinnamon)"}, {"url": "/linuxmint-cd/stable/19/linuxmint-19-mate-32bit.iso", "name": "19 (32bit, mate)"}, {"url": "/linuxmint-cd/stable/19/linuxmint-19-cinnamon-32bit.iso", "name": "19 (32bit, cinnamon)"}], "distro": "Linux Mint"}];
+function update_isodistro_options() {
+	var s = document.getElementById("isodistro");
+	s.options.length = 0;
+	for (var i=0; i<isoinfo.length; i++) {
+		s.options[s.options.length] = new Option(isoinfo[i].distro, i);
+	}
+	switchdistro();
+}
+
+function modal()
+{
+	var bx = document.getElementById("isomodal");
+	bx.style.visibility = (bx.style.visibility == "visible") ? "hidden" : "visible";
+}
+
+function switchdistro()
+{
+	var distro = document.getElementById("isodistro");
+	var idx = distro.selectedIndex;
+	var s = document.getElementById('isoversion');
+	s.options.length = 0;
+	for (var i=0; i<isoinfo[idx].urls.length; i++) {
+		s.options[s.options.length] = new Option(isoinfo[idx].urls[i].name, i)
+	}
+}
+function downloadiso()
+{
+	var distro=document.getElementById("isodistro");
+	var version=document.getElementById("isoversion");
+	var i=distro.selectedIndex;
+	var j=version.selectedIndex;
+	var link = isoinfo[i].urls[j].url;
+	window.open(link);
+    modal();
+}
+
+update_isodistro_options();
+</script>
+
+<script>
+(function() {
+'use strict'
+
+var userInput = document.getElementById('search')
+var repoList = document.querySelectorAll('.filelist > tbody > tr')
+
+userInput.addEventListener('input', function(evt) {
+    var pat = new RegExp(userInput.value, 'i')
+    Array.prototype.slice.call(repoList).forEach(function(tr) {
+        var a = tr.querySelector('a')
+        if (!pat.test(a.text)) {
+            tr.classList.add('hidden')
+        } else {
+            tr.classList.remove('hidden')
+        }
+    })
+})
+
+document.body.onkeyup = function(evt) {
+    if (evt.keyCode === 83 && document.activeElement.tagName !== 'INPUT') {
+        userInput.scrollIntoView()
+        userInput.focus()
+    }
+}
+})()
+</script>
+<!-- Designed by Miaomiao Li. It's a wonderful life! -->
+<!--
+    vim:ai:et:sta:ts=4:sts=4:sw=4
+-->
+</body>
+</html>
