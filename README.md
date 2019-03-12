@@ -89,7 +89,9 @@ Mac 自行找对应软件包
 ![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/006.png)
 ![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/007.png)
 上面softether socks5 的5001 改改口是客户端监听本地的端口(改成实际端口)
-hub 名称 脚本默认设置的 VPn ,用户认证 账号 VPNUser 密码 123456
+hub 名称 脚本默认设置的 VPn
+端口 脚本默认设置 992
+用户认证 账号 VPNUser 密码 123456
 创建桥接那张图就是上面eoip 的隧道接口
 到此 中转服务器结束
 
