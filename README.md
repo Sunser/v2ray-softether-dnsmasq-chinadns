@@ -1,4 +1,8 @@
 使用说明
+
+# 申明
+首先作者本着无私奉献相互学习的精神发布该脚本 不承担任何法律风险 也不收取任何一分钱，请勿用于非法用途
+
 本脚步只适用 CentOS 7 环境，以及 对需要使用 ICMP协议的人使用，本架构过于复杂，不太需要 ICMP协议的可以 使用 ROS + Lede 的方案 
 
 主要使用 V2ray 作为底层构建 SOcks5 通道，在此基础上再使用 SOftether 对接
@@ -151,3 +155,14 @@ add action=mark-connection chain=input disabled=yes in-interface=proxy-tunnel2 n
 
 add action=mark-routing chain=output connection-mark=PC2 disabled=yes new-routing-mark=PR2 passthrough=yes
 
+# DNS说明
+ROS 修改 dhcp 下发dns 服务器地址为该中转节点地址，或者PC 直接设置 dns
+
+# 其他补充
+gfwlist    手工更新命令
+wget -O gfwlist.conf https://cokebar.github.io/gfwlist2dnsmasq/dnsmasq_gfwlist.conf
+mv -f gfwlist.conf /etc/dnsmasq.d/
+
+china地址表 手工更新命令
+cd /opt/chinadns/
+curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > chnroute.txt
