@@ -155,6 +155,8 @@ add action=mark-connection chain=input disabled=yes in-interface=proxy-tunnel2 n
 
 add action=mark-routing chain=output connection-mark=PC2 disabled=yes new-routing-mark=PR2 passthrough=yes
 
+下载 chinaaddr - 副本.rsc 文件 修改前几行过滤的地址为自己的vps地址或域名，此文件从chinadns 内提取可以参考自行修改
+
 # DNS说明
 ROS 修改 dhcp 下发dns 服务器地址为该中转节点地址，或者PC 直接设置 dns
 
