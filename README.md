@@ -36,6 +36,8 @@ chown -R nginx:nginx /opt/web/mirrors/
 等待安装结束并检查是否有报错，如果报错还原快照重新来过。安装成功后需要修改的配置如下：
 
 1. 配置V2ray 客户端，配置在 /opt/v2ray/config.json 修改完成后使用 supervisorctl reload # 重载进程
+只需要修改下图箭头部分
+![image](https://github.com/Sunser/v2ray-softether-dnsmasq-chinadns/blob/master/images/001.png)
 如果对接多台服务端，可以cp 几份 config.json 文件 并修改 supervisor v2ray 配置文件：文件存在在 /etc/supervisor/supervisor.d/v2ray.conf
 配置示范:
 [program:v2ray-us]
