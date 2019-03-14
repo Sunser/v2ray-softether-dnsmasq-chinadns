@@ -672,7 +672,7 @@ set timeout 30
 spawn /opt/softether/vpncmd localhost:992 /server
 
 expect "VPN Server" {send "ConfigSet\r";}
-expect "Config file path name" {send "$configpath/softether.config\r";}
+expect "Config file path name" {send "$configpath/softether-123456.config\r";}
 expect "VPN Server" {send "exit\r";}
 expect eof
 EOF
